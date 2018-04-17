@@ -3,6 +3,7 @@ require 'io/console'
 # require './lib/model/table_cell_model'
 require 'thor'
 require 'apple_cert_monitor'
+require 'fileutils'
 
 module AppleCertMonitor
   class AppleDevClient < Thor
@@ -110,8 +111,12 @@ module AppleCertMonitor
 
     def self.write_to_file_and_puts_to_console(string)
       puts string
+      output_dir = 'output'
+      unless File.directory?(output_dir)
+        FileUtils.mkdir_p(output_dir)
+      end
       if string.to_s.length > 0
-        File.open("output/#{@@output_file_name}", 'a') {|f|
+        File.open("#{output_dir}/#{@@output_file_name}", 'a') {|f|
           f << string
         }
       end
