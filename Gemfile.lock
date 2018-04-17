@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    apple_cert_monitor (0.0.2)
+    apple_cert_monitor (0.1.0)
       fastlane (~> 2.91)
       thor (~> 0.20)
 

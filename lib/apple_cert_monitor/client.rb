@@ -111,7 +111,7 @@ module AppleCertMonitor
 
     def self.write_to_file_and_puts_to_console(string)
       puts string
-      output_dir = 'output'
+      output_dir = "#{ENV['HOME']}/Downloads/AppleCertMonitorOutput"
       unless File.directory?(output_dir)
         FileUtils.mkdir_p(output_dir)
       end
