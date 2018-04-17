@@ -36,6 +36,8 @@ module AppleCertMonitor
 
     desc "expiring", "find expiring certificates in all teams"
     def expiring
+      AppleDevClient.set_output_file_name("expiring_certificates-#{DateTime.now.strftime("%m_%d_%H_%M")}.txt")
+
       # Get all the teams
       teams = AppleDevClient.teams
 

@@ -275,9 +275,9 @@ module AppleCertMonitor
       # configure title string
       title_str = model_type ==
           TableCellModel::MODEL_TYPES[:is_certificate] ?
-                      ("*" + "      Found #{target_items.count} certificates with less than #{days_left_max} days." + "\n")
+                      ("*" + "      Found #{target_items.count} certificates " + (days_left_max <= 0 ? "expired." : "with less than #{days_left_max} days left.") + "\n")
                       :
-                      ("*" + "      Found #{target_items.count} provisioning profiles with less than #{days_left_max} days." + "\n")
+                      ("*" + "      Found #{target_items.count} provisioning profiles " + (days_left_max <= 0 ? "expired." : "with less than #{days_left_max} days left.") + "\n")
       write_to_file_and_puts_to_console(title_str)
 
       # print out
