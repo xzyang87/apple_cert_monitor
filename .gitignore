@@ -8,5 +8,4 @@
 /tmp/
 /.idea/
 /vendor/
-cert_file.txt
 *.gem

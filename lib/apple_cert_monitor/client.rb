@@ -3,10 +3,11 @@ require 'io/console'
 # require './lib/model/table_cell_model'
 require 'thor'
 require 'apple_cert_monitor'
-require 'apple_cert_monitor/consts'
 
 module AppleCertMonitor
   class AppleDevClient < Thor
+
+    @@output_file_name
 
     desc "print_all_teams", "find and pretty-print all teams"
     def print_all_teams
@@ -23,10 +24,6 @@ module AppleCertMonitor
       end
 
       all_teams = Spaceship.client.teams
-
-      if File.exists?(Consts::OUTPUT_FILE_NAME)
-        File.delete(Consts::OUTPUT_FILE_NAME)
-      end
 
       if all_teams.count <= 0
         puts "No teams available on the Developer Portal"
@@ -107,10 +104,14 @@ module AppleCertMonitor
       find_items(cellModels, model_type, 0, 60)
     end
 
+    def self.set_output_file_name(string)
+      @@output_file_name = string
+    end
+
     def self.write_to_file_and_puts_to_console(string)
       puts string
       if string.to_s.length > 0
-        File.open(Consts::OUTPUT_FILE_NAME, 'a') {|f|
+        File.open("output/#{@@output_file_name}", 'a') {|f|
           f << string
         }
       end
@@ -148,9 +149,9 @@ module AppleCertMonitor
 
       # table title
       table_title = generate_formatted_table_row("*            ",
-                                                 "No.",
-                                                 "Certificate Name",
-                                                 "Days",
+                                                 table_header_1,
+                                                 table_header_2,
+                                                 table_header_3,
                                                  index_max_length,
                                                  longest_certificate_name_length,
                                                  "  |  ")
