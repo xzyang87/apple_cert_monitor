@@ -1,5 +1,9 @@
+require "spaceship"
+require 'thor'
+require 'apple_cert_monitor'
+
 module AppleCertMonitor
-  class CheckCertificates
+  class CheckCertificates < Thor
     def self.expired
       # Get all the teams
       teams = AppleDevClient.teams
