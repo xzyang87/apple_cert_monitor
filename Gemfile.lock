@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    apple_cert_monitor (0.0.1)
+    apple_cert_monitor (0.0.2)
       thor (~> 0.20)
 
 GEM
