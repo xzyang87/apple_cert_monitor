@@ -1,11 +1,4 @@
 #!/usr/bin/env ruby
-# require 'apple_cert_monitor'
-require 'apple_cert_monitor/cli'
-require 'apple_cert_monitor/client'
-require 'apple_cert_monitor/testlibfile'
+require 'apple_cert_monitor/provisioning_profile/check_provisioning_profiles'
 
-# puts AppleCertMonitor.print_sth
-# AppleCertMonitor::CLI.ipsum
-AppleCertMonitor::CLI.start
-AppleCertMonitor::AppleDevClient.start
-AppleCertMonitor::Client.start
+AppleCertMonitor::CheckProvisioningProfiles.start
