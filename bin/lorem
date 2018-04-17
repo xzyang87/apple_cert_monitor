@@ -1,4 +1,0 @@
-#!/usr/bin/env ruby
-require 'apple_cert_monitor/cli'
-
-AppleCertMonitor::CLI.start
