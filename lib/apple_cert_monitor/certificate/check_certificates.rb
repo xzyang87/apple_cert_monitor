@@ -1,10 +1,14 @@
 require "spaceship"
 require 'thor'
 require 'apple_cert_monitor'
+require 'apple_cert_monitor/client'
+require 'apple_cert_monitor/model/table_cell_model'
 
 module AppleCertMonitor
   class CheckCertificates < Thor
-    def self.expired
+
+    desc "expired", "find expired certificates in all teams"
+    def expired
       # Get all the teams
       teams = AppleDevClient.teams
 
@@ -17,7 +21,7 @@ module AppleCertMonitor
         Spaceship.client.team_id = team["teamId"]
 
         # find & print expired certificates
-        cellModels = convert_certificates_to_table_cells(fetch_all_certificates)
+        cellModels = CheckCertificates.convert_certificates_to_table_cells(CheckCertificates.fetch_all_certificates)
         AppleDevClient.find_expired_items(cellModels,
                                           TableCellModel::MODEL_TYPES[:is_certificate])
 
@@ -26,7 +30,8 @@ module AppleCertMonitor
       end
     end
 
-    def self.expiring
+    desc "expiring", "find expiring certificates in all teams"
+    def expiring
       # Get all the teams
       teams = AppleDevClient.teams
 
@@ -39,7 +44,7 @@ module AppleCertMonitor
         Spaceship.client.team_id = team["teamId"]
 
         # find & print 60 days to expire certificates
-        cellModels = convert_certificates_to_table_cells(fetch_all_certificates)
+        cellModels = CheckCertificates.convert_certificates_to_table_cells(CheckCertificates.fetch_all_certificates)
         AppleDevClient.find_60_days_to_expire_items(cellModels,
                                                     TableCellModel::MODEL_TYPES[:is_certificate])
 

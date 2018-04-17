@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
 
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  # spec.executables << ['apple_cert_monitor','apple_dev_client','check_certificates']
 
   spec.require_paths = ["lib"]
 

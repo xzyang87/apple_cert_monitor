@@ -1,6 +1,5 @@
 require "spaceship"
 require 'io/console'
-# require './lib/consts'
 # require './lib/model/table_cell_model'
 require 'thor'
 require 'apple_cert_monitor'
@@ -8,15 +7,6 @@ require 'apple_cert_monitor/consts'
 
 module AppleCertMonitor
   class AppleDevClient < Thor
-
-    @@teams = []
-
-    # Get all the teams
-
-    desc "teams", "find and return all teams"
-    def teams
-      return @@teams
-    end
 
     desc "print_all_teams", "find and pretty-print all teams"
     def print_all_teams
@@ -32,13 +22,13 @@ module AppleCertMonitor
         AppleDevClient.login(username, password)
       end
 
-      @@teams = Spaceship.client.teams
+      all_teams = Spaceship.client.teams
 
       if File.exists?(Consts::OUTPUT_FILE_NAME)
         File.delete(Consts::OUTPUT_FILE_NAME)
       end
 
-      if @@teams.count <= 0
+      if all_teams.count <= 0
         puts "No teams available on the Developer Portal"
         puts "You must accept an invitation to a team for it to be available"
         puts "To learn more about teams and how to use them visit https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/ManagingYourTeam/ManagingYourTeam.html"
@@ -46,8 +36,25 @@ module AppleCertMonitor
       else
         puts "=====================================================================".green
         puts "Multiple teams found on the " + "Developer Portal"
-        AppleDevClient.pretty_print_teams(@@teams)
+        AppleDevClient.pretty_print_teams(all_teams)
       end
+    end
+
+    def self.teams
+      if Spaceship.client == nil
+        puts "================================================================================================================".green
+        puts "Welcome to this cute tool. With its help, managing complicated Apple Developer Accounts have never been so easy!".green
+        puts "=====================================================================".green
+        puts "First, please enter Apple Developer Account info."
+        puts 'Enter Username:'
+        username = STDIN.gets.strip
+        password = STDIN.getpass("Enter Password:")
+        puts "Now login in, please wait......".green
+        AppleDevClient.login(username, password)
+      end
+
+      all_teams = Spaceship.client.teams
+      return all_teams
     end
 
     def self.print_team_header(team, team_index)
