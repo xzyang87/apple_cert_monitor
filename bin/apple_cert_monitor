@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 require 'apple_cert_monitor'
 
-puts AppleCertMonitor.print_sth
+# puts AppleCertMonitor.print_sth
+AppleCertMonitor::CLI.ipsum
