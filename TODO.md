@@ -2,8 +2,8 @@
 
 ## Test
 
-- [ ] Add `rspec`
-- [ ] Unit Test
+- [x] Add `rspec`
+- [x] Unit Test
 - [ ] Test Coverage
 - [ ] CI
 
