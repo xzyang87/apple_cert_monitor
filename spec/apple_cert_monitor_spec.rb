@@ -5,8 +5,7 @@ RSpec.describe AppleCertMonitor do
 
   describe ".print_sth" do
     it "should print to stdout" do
-      #expect { dummy_class.print_sth }.to output("Just to print something...").to_stdout
-      expect(dummy_class.print_sth).to eq("Just to print something...")
+      expect { dummy_class.print_sth }.to output("Just to print something...").to_stdout
     end
   end
 end
